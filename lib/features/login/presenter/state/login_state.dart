@@ -3,14 +3,14 @@ part of 'login_cubit.dart';
 @freezed
 class LoginState with _$LoginState {
   const factory LoginState({
-    required String username,
-    required String password,
-    required bool isRemeberMe,
+    String? usernameError,
+    String? passwordError,
+    @Default(false) bool isRemeberMe,
+    @Default(false) bool isLoginSuccess,
   }) = _LoginState;
 
   factory LoginState.initial() => const LoginState(
-        username: '',
-        password: '',
-        isRemeberMe: false,
+        usernameError: null,
+        passwordError: null,
       );
 }

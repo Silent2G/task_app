@@ -16,9 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginState {
-  String get username => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
+  String? get usernameError => throw _privateConstructorUsedError;
+  String? get passwordError => throw _privateConstructorUsedError;
   bool get isRemeberMe => throw _privateConstructorUsedError;
+  bool get isLoginSuccess => throw _privateConstructorUsedError;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -33,7 +34,11 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({String username, String password, bool isRemeberMe});
+  $Res call(
+      {String? usernameError,
+      String? passwordError,
+      bool isRemeberMe,
+      bool isLoginSuccess});
 }
 
 /// @nodoc
@@ -51,22 +56,27 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
-    Object? password = null,
+    Object? usernameError = freezed,
+    Object? passwordError = freezed,
     Object? isRemeberMe = null,
+    Object? isLoginSuccess = null,
   }) {
     return _then(_value.copyWith(
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
+      usernameError: freezed == usernameError
+          ? _value.usernameError
+          : usernameError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordError: freezed == passwordError
+          ? _value.passwordError
+          : passwordError // ignore: cast_nullable_to_non_nullable
+              as String?,
       isRemeberMe: null == isRemeberMe
           ? _value.isRemeberMe
           : isRemeberMe // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoginSuccess: null == isLoginSuccess
+          ? _value.isLoginSuccess
+          : isLoginSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -80,7 +90,11 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String username, String password, bool isRemeberMe});
+  $Res call(
+      {String? usernameError,
+      String? passwordError,
+      bool isRemeberMe,
+      bool isLoginSuccess});
 }
 
 /// @nodoc
@@ -96,22 +110,27 @@ class __$$LoginStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? username = null,
-    Object? password = null,
+    Object? usernameError = freezed,
+    Object? passwordError = freezed,
     Object? isRemeberMe = null,
+    Object? isLoginSuccess = null,
   }) {
     return _then(_$LoginStateImpl(
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
+      usernameError: freezed == usernameError
+          ? _value.usernameError
+          : usernameError // ignore: cast_nullable_to_non_nullable
+              as String?,
+      passwordError: freezed == passwordError
+          ? _value.passwordError
+          : passwordError // ignore: cast_nullable_to_non_nullable
+              as String?,
       isRemeberMe: null == isRemeberMe
           ? _value.isRemeberMe
           : isRemeberMe // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoginSuccess: null == isLoginSuccess
+          ? _value.isLoginSuccess
+          : isLoginSuccess // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -121,20 +140,25 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 
 class _$LoginStateImpl implements _LoginState {
   const _$LoginStateImpl(
-      {required this.username,
-      required this.password,
-      required this.isRemeberMe});
+      {this.usernameError,
+      this.passwordError,
+      this.isRemeberMe = false,
+      this.isLoginSuccess = false});
 
   @override
-  final String username;
+  final String? usernameError;
   @override
-  final String password;
+  final String? passwordError;
   @override
+  @JsonKey()
   final bool isRemeberMe;
+  @override
+  @JsonKey()
+  final bool isLoginSuccess;
 
   @override
   String toString() {
-    return 'LoginState(username: $username, password: $password, isRemeberMe: $isRemeberMe)';
+    return 'LoginState(usernameError: $usernameError, passwordError: $passwordError, isRemeberMe: $isRemeberMe, isLoginSuccess: $isLoginSuccess)';
   }
 
   @override
@@ -142,16 +166,19 @@ class _$LoginStateImpl implements _LoginState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginStateImpl &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
+            (identical(other.usernameError, usernameError) ||
+                other.usernameError == usernameError) &&
+            (identical(other.passwordError, passwordError) ||
+                other.passwordError == passwordError) &&
             (identical(other.isRemeberMe, isRemeberMe) ||
-                other.isRemeberMe == isRemeberMe));
+                other.isRemeberMe == isRemeberMe) &&
+            (identical(other.isLoginSuccess, isLoginSuccess) ||
+                other.isLoginSuccess == isLoginSuccess));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username, password, isRemeberMe);
+  int get hashCode => Object.hash(
+      runtimeType, usernameError, passwordError, isRemeberMe, isLoginSuccess);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -164,16 +191,19 @@ class _$LoginStateImpl implements _LoginState {
 
 abstract class _LoginState implements LoginState {
   const factory _LoginState(
-      {required final String username,
-      required final String password,
-      required final bool isRemeberMe}) = _$LoginStateImpl;
+      {final String? usernameError,
+      final String? passwordError,
+      final bool isRemeberMe,
+      final bool isLoginSuccess}) = _$LoginStateImpl;
 
   @override
-  String get username;
+  String? get usernameError;
   @override
-  String get password;
+  String? get passwordError;
   @override
   bool get isRemeberMe;
+  @override
+  bool get isLoginSuccess;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
