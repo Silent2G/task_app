@@ -13,7 +13,6 @@ class RememberCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Checkbox(
-      
       value: isChecked,
       onChanged: onChanged,
     );
