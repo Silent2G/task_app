@@ -27,14 +27,11 @@ class UsersDtoMapperImpl with ErrorCodes implements IUsersDtoMapper {
 
   List<UserEntity> convert(List<User> response) {
     return response
-        .map((user) => UserEntity(
-              id: user.id,
-              name: user.name,
-              username: user.username,
-              email: user.email,
-              phone: user.phone,
-              website: user.website,
-            ))
+        .map(
+          (user) => UserEntity.fromJson(
+            user.toJson(),
+          ),
+        )
         .toList();
   }
 }

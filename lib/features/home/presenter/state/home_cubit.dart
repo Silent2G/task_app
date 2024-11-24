@@ -24,18 +24,23 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> init() async => downloadUsers();
 
   void downloadUsers() {
+    emit(state.copyWith(status: const StateStatus.loading()));
     _cancelableOperation?.cancel();
     _cancelableOperation =
         CancelableOperation.fromFuture(_usersInteractor.getUsers());
     _cancelableOperation?.then(
       (value) => value.fold(
         (l) {
-          emit(state.copyWith(status: StateStatus.failure(l.message)));
-        },
-        (right) {
           emit(
-            state.copyWith(users: right, status: const StateStatus.success()),
+            state.copyWith(
+              status: const StateStatus.failure(
+                  //  l.message
+                  "Something went wrong ..."), // this is dummy failure text =)
+            ),
           );
+        },
+        (r) {
+          emit(state.copyWith(users: r, status: const StateStatus.success()));
         },
       ),
     );

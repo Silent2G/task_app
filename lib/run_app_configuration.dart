@@ -12,8 +12,6 @@ Future<void> runAppConfiguration() async {
 }
 
 Future<void> _config() async {
-  // TODO add some stage configuration, DI setup, etc
-
   configureInjection();
   await getIt.allReady();
 }
