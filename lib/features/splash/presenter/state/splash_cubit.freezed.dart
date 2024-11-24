@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SplashState {
   bool get isLoaded => throw _privateConstructorUsedError;
+  bool get isRemeberUser => throw _privateConstructorUsedError;
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +32,7 @@ abstract class $SplashStateCopyWith<$Res> {
           SplashState value, $Res Function(SplashState) then) =
       _$SplashStateCopyWithImpl<$Res, SplashState>;
   @useResult
-  $Res call({bool isLoaded});
+  $Res call({bool isLoaded, bool isRemeberUser});
 }
 
 /// @nodoc
@@ -50,11 +51,16 @@ class _$SplashStateCopyWithImpl<$Res, $Val extends SplashState>
   @override
   $Res call({
     Object? isLoaded = null,
+    Object? isRemeberUser = null,
   }) {
     return _then(_value.copyWith(
       isLoaded: null == isLoaded
           ? _value.isLoaded
           : isLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRemeberUser: null == isRemeberUser
+          ? _value.isRemeberUser
+          : isRemeberUser // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -68,7 +74,7 @@ abstract class _$$SplashStateImplCopyWith<$Res>
       __$$SplashStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoaded});
+  $Res call({bool isLoaded, bool isRemeberUser});
 }
 
 /// @nodoc
@@ -85,11 +91,16 @@ class __$$SplashStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isLoaded = null,
+    Object? isRemeberUser = null,
   }) {
     return _then(_$SplashStateImpl(
       isLoaded: null == isLoaded
           ? _value.isLoaded
           : isLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isRemeberUser: null == isRemeberUser
+          ? _value.isRemeberUser
+          : isRemeberUser // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -98,14 +109,17 @@ class __$$SplashStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SplashStateImpl implements _SplashState {
-  const _$SplashStateImpl({required this.isLoaded});
+  const _$SplashStateImpl(
+      {required this.isLoaded, required this.isRemeberUser});
 
   @override
   final bool isLoaded;
+  @override
+  final bool isRemeberUser;
 
   @override
   String toString() {
-    return 'SplashState(isLoaded: $isLoaded)';
+    return 'SplashState(isLoaded: $isLoaded, isRemeberUser: $isRemeberUser)';
   }
 
   @override
@@ -114,11 +128,13 @@ class _$SplashStateImpl implements _SplashState {
         (other.runtimeType == runtimeType &&
             other is _$SplashStateImpl &&
             (identical(other.isLoaded, isLoaded) ||
-                other.isLoaded == isLoaded));
+                other.isLoaded == isLoaded) &&
+            (identical(other.isRemeberUser, isRemeberUser) ||
+                other.isRemeberUser == isRemeberUser));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoaded);
+  int get hashCode => Object.hash(runtimeType, isLoaded, isRemeberUser);
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.
@@ -130,11 +146,14 @@ class _$SplashStateImpl implements _SplashState {
 }
 
 abstract class _SplashState implements SplashState {
-  const factory _SplashState({required final bool isLoaded}) =
-      _$SplashStateImpl;
+  const factory _SplashState(
+      {required final bool isLoaded,
+      required final bool isRemeberUser}) = _$SplashStateImpl;
 
   @override
   bool get isLoaded;
+  @override
+  bool get isRemeberUser;
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.

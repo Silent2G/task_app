@@ -4,26 +4,29 @@ import 'package:go_router/go_router.dart';
 import 'package:task_app/features/splash/presenter/state/splash_cubit.dart';
 import 'package:task_app/router/routes.dart';
 
-class SplashPage extends StatelessWidget {
-  const SplashPage({super.key});
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SplashCubit, SplashState>(
       listener: (context, state) {
         if (state.isLoaded) {
-          GoRouter.of(context).pushReplacement(Routes.login);
+          GoRouter.of(context).pushReplacement(
+            state.isRemeberUser ? Routes.home : Routes.login,
+          );
         }
       },
       builder: (context, state) {
         return const Scaffold(
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.white,
           body: Center(
             child: Text(
-              'SPLASH',
+              'TEST APP',
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 36,
-                color: Colors.white,
+                color: Colors.black,
                 fontWeight: FontWeight.w600,
               ),
             ),

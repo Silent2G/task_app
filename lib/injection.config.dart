@@ -13,6 +13,11 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import 'common/data/api/injectable_api_module.dart' as _i1000;
 import 'common/data/provider/provider_error_mapper.dart' as _i125;
+import 'common/data/repository/security_repository/secure_storage_repository_impl.dart'
+    as _i754;
+import 'common/domain/interactor/secure_storage_interactor_impl.dart' as _i170;
+import 'common/domain/repository/i_secure_storage_reposiroy.dart' as _i1016;
+import 'common/presenter/interactor/i_secure_storage_interactor.dart' as _i538;
 import 'features/home/data/api/users_api.dart' as _i908;
 import 'features/home/data/provider/contracts/i_users_remote_provider.dart'
     as _i1042;
@@ -44,7 +49,11 @@ _i174.GetIt init(
         gh<_i908.UsersApi>(),
         gh<_i125.ProviderErrorMapper>(),
       ));
+  gh.factory<_i1016.ISecureStorageRepository>(
+      () => _i754.SecureStorageRepositoryImpl());
   gh.factory<_i574.IUsersDtoMapper>(() => _i633.UsersDtoMapperImpl());
+  gh.factory<_i538.ISecureStorageInteractor>(() =>
+      _i170.SecureStorageInteractorImpl(gh<_i1016.ISecureStorageRepository>()));
   gh.factory<_i21.IUsersRepository>(() => _i627.UsersRepositoryImpl(
         gh<_i574.IUsersDtoMapper>(),
         gh<_i1042.IUsersRemoteProvider>(),

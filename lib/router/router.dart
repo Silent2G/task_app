@@ -7,9 +7,10 @@ import 'package:task_app/features/home/presenter/state/home_cubit.dart';
 import 'package:task_app/features/home/presenter/ui/page/home_screen.dart';
 import 'package:task_app/features/login/presenter/state/login_cubit.dart';
 import 'package:task_app/features/login/presenter/ui/page/login_screen.dart';
-import 'package:task_app/features/splash/presenter/ui/page/splash_page.dart';
+import 'package:task_app/features/splash/presenter/state/splash_cubit.dart';
+import 'package:task_app/features/splash/presenter/ui/page/splash_screen.dart';
 import 'package:task_app/features/user_detail/presenter/state/user_detail_cubit.dart';
-import 'package:task_app/features/user_detail/presenter/ui/page/user_detail_page.dart';
+import 'package:task_app/features/user_detail/presenter/ui/page/user_detail_screen.dart';
 import 'package:task_app/router/routes.dart';
 
 class AppRouter {
@@ -22,7 +23,10 @@ class AppRouter {
         pageBuilder: (context, state) => _defaultTransition(
           context: context,
           state: state,
-          child: const SplashPage(),
+          child: BlocProvider(
+            create: (_) => SplashCubit()..init(),
+            child: const SplashScreen(),
+          ),
         ),
       ),
       GoRoute(

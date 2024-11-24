@@ -4,9 +4,11 @@ part of 'splash_cubit.dart';
 class SplashState with _$SplashState {
   const factory SplashState({
     required bool isLoaded,
+    required bool isRemeberUser,
   }) = _SplashState;
 
   factory SplashState.initial() => const SplashState(
         isLoaded: false,
+        isRemeberUser: false,
       );
 }

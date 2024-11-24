@@ -15,11 +15,9 @@ class HomeScreen extends StatelessWidget with ToastMixin {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeState>(
       listener: (context, state) {
-        state.status.maybeMap(
-          failure: (value) {
-            showToast(context: context, body: const FailureToastMessage());
-          },
-          orElse: () {},
+        state.status.mapOrNull(
+          failure: (value) =>
+              showToast(context: context, body: const FailureToastMessage()),
         );
       },
       builder: (context, state) {
@@ -27,7 +25,7 @@ class HomeScreen extends StatelessWidget with ToastMixin {
           success: (value) => Scaffold(
             appBar: AppBar(title: const Text('User List')),
             body: RefreshIndicator(
-              onRefresh: () async => context.read<HomeCubit>().downloadUsers(),
+              onRefresh: () => context.read<HomeCubit>().downloadUsers(),
               child: ListView.builder(
                 itemCount: state.users.length,
                 itemBuilder: (context, index) {

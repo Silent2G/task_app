@@ -27,54 +27,59 @@ class _LoginScreenState extends State<LoginScreen> {
             GoRouter.of(context).pushReplacement(Routes.home);
           }
         },
-        builder: (context, state) {
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Spacer(),
-                LoginTextField(
-                  label: 'User name',
-                  controller: _usernameController,
-                  error: state.usernameError,
-                ),
-                LoginTextField(
-                  label: 'Password',
-                  controller: _passwordController,
-                  error: state.passwordError,
-                  obscureText: true,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  children: [
-                    RememberCheckBox(
-                      isChecked: state.isRemeberMe,
-                      onChanged: (value) {
-                        context.read<LoginCubit>().onChanged(value);
-                      },
-                    ),
-                    const Text('Remember Me'),
-                  ],
-                ),
-                const Spacer(),
-                SafeArea(
-                  child: LoginButton(
-                    text: "Login",
-                    width: double.maxFinite,
-                    onPressed: () {
-                      context.read<LoginCubit>().validateCredentials(
-                          _usernameController.text, _passwordController.text);
+        builder: (context, state) => Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Spacer(),
+              LoginTextField(
+                label: 'User name',
+                controller: _usernameController,
+                error: state.usernameError,
+              ),
+              LoginTextField(
+                label: 'Password',
+                controller: _passwordController,
+                error: state.passwordError,
+                obscureText: true,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  RememberCheckBox(
+                    isChecked: state.isRemeberMe,
+                    onChanged: (value) {
+                      context.read<LoginCubit>().onChanged(value);
                     },
                   ),
-                )
-              ],
-            ),
-          );
-        },
+                  const Text('Remember Me'),
+                ],
+              ),
+              const Spacer(),
+              SafeArea(
+                child: LoginButton(
+                  text: "Login",
+                  width: double.maxFinite,
+                  onPressed: () {
+                    context.read<LoginCubit>().validateCredentials(
+                        _usernameController.text, _passwordController.text);
+                  },
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

@@ -5,5 +5,8 @@ import 'package:task_app/features/home/domain/entity/user_entity.dart';
 abstract class IUsersInteractor {
   const IUsersInteractor();
 
-  Future<Either<IFailure, List<UserEntity>>> getUsers();
+  Future<Either<IFailure, List<UserEntity>>> getUsers({
+    // E.g. token usage
+    required String? authToken,
+  });
 }

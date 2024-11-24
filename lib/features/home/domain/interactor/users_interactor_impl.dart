@@ -12,6 +12,9 @@ class UsersInteractorImpl implements IUsersInteractor {
   const UsersInteractorImpl(this.usersRepository);
 
   @override
-  Future<Either<IFailure, List<UserEntity>>> getUsers() =>
+  Future<Either<IFailure, List<UserEntity>>> getUsers({
+    // E.g. token usage
+    required String? authToken,
+  }) =>
       usersRepository.fetchUsers();
 }
