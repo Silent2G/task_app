@@ -1,4 +1,4 @@
-part of 'splash_cubit.dart';
+part of 'splash_bloc.dart';
 
 @freezed
 class SplashState with _$SplashState {

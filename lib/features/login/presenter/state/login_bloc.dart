@@ -5,26 +5,29 @@ import 'package:task_app/common/presenter/ui/utils/token_generator.dart';
 import 'package:task_app/common/presenter/ui/utils/validators.dart';
 import 'package:task_app/injection.dart';
 
-part 'login_cubit.freezed.dart';
+part 'login_bloc.freezed.dart';
+part 'login_event.dart';
 part 'login_state.dart';
 
-class LoginCubit extends Cubit<LoginState> {
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final ISecureStorageInteractor _storageInteractor;
 
-  LoginCubit({ISecureStorageInteractor? storageInteractor})
+  LoginBloc({ISecureStorageInteractor? storageInteractor})
       : _storageInteractor =
             storageInteractor ?? getIt<ISecureStorageInteractor>(),
-        super(
-          LoginState.initial(),
-        );
+        super(LoginState.initial()) {
+    on<LoginEvent>((event, emit) {
+      event.map(
+        validateCredentials: (event) =>
+            _validateCredentials(event.username, event.password, emit),
+        toggleRememberMe: (event) => _toggleRememberMe(event.value, emit),
+      );
+    });
+  }
 
-  Future<void> init() async {}
-
-  void validateCredentials(
-    String userName,
-    String password,
-  ) {
-    final userNameError = Validators.isUserNameValid(userName);
+  Future<void> _validateCredentials(
+      String username, String password, Emitter<LoginState> emit) async {
+    final userNameError = Validators.isUserNameValid(username);
     final passwordError = Validators.isPasswordValid(password);
 
     emit(state.copyWith(
@@ -35,12 +38,12 @@ class LoginCubit extends Cubit<LoginState> {
     if (userNameError == null && passwordError == null) {
       emit(state.copyWith(isLoginSuccess: true));
 
-      final token = TokenGenerator.generateToken(userName, password);
-      _storageInteractor.saveToken(token);
+      final token = TokenGenerator.generateToken(username, password);
+      await _storageInteractor.saveToken(token);
     }
   }
 
-  void onChanged(bool? value) {
+  void _toggleRememberMe(bool? value, Emitter<LoginState> emit) {
     emit(state.copyWith(isRemeberMe: value ?? false));
 
     if (value ?? false) {

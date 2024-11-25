@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_app/features/home/domain/entity/user_entity.dart';
-import 'package:task_app/features/home/presenter/state/home_cubit.dart';
+import 'package:task_app/features/home/presenter/state/home_bloc.dart';
 import 'package:task_app/features/home/presenter/ui/page/home_screen.dart';
-import 'package:task_app/features/login/presenter/state/login_cubit.dart';
+import 'package:task_app/features/login/presenter/state/login_bloc.dart';
 import 'package:task_app/features/login/presenter/ui/page/login_screen.dart';
-import 'package:task_app/features/splash/presenter/state/splash_cubit.dart';
+import 'package:task_app/features/splash/presenter/state/splash_bloc.dart';
 import 'package:task_app/features/splash/presenter/ui/page/splash_screen.dart';
-import 'package:task_app/features/user_detail/presenter/state/user_detail_cubit.dart';
+import 'package:task_app/features/user_detail/presenter/state/user_detail_bloc.dart';
 import 'package:task_app/features/user_detail/presenter/ui/page/user_detail_screen.dart';
 import 'package:task_app/router/routes.dart';
 
@@ -24,7 +24,7 @@ class AppRouter {
           context: context,
           state: state,
           child: BlocProvider(
-            create: (_) => SplashCubit()..init(),
+            create: (_) => SplashBloc()..add(const SplashEvent.started()),
             child: const SplashScreen(),
           ),
         ),
@@ -35,7 +35,7 @@ class AppRouter {
           context: context,
           state: state,
           child: BlocProvider(
-            create: (_) => LoginCubit(),
+            create: (_) => LoginBloc(),
             child: const LoginScreen(),
           ),
         ),
@@ -46,7 +46,7 @@ class AppRouter {
           context: context,
           state: state,
           child: BlocProvider(
-            create: (_) => HomeCubit()..init(),
+            create: (_) => HomeBloc()..add(const HomeEvent.fetchUsers()),
             child: const HomeScreen(),
           ),
         ),
@@ -61,7 +61,7 @@ class AppRouter {
             context: context,
             state: state,
             child: BlocProvider(
-              create: (_) => UserDetailCubit(user: user)..init(),
+              create: (_) => UserDetailBloc(user: user),
               child: const UserDetailScreen(),
             ),
           );

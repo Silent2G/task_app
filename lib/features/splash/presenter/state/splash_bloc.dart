@@ -3,21 +3,26 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:task_app/common/presenter/interactor/i_secure_storage_interactor.dart';
 import 'package:task_app/injection.dart';
 
-part 'splash_cubit.freezed.dart';
+part 'splash_bloc.freezed.dart';
+part 'splash_event.dart';
 part 'splash_state.dart';
 
-class SplashCubit extends Cubit<SplashState> {
+class SplashBloc extends Bloc<SplashEvent, SplashState> {
   final ISecureStorageInteractor _storageInteractor;
 
-  SplashCubit({
+  SplashBloc({
     ISecureStorageInteractor? storageInteractor,
   })  : _storageInteractor =
             storageInteractor ?? getIt<ISecureStorageInteractor>(),
-        super(SplashState.initial());
+        super(SplashState.initial()) {
+    on<SplashEvent>((event, emit) async {
+      await event.map(
+        started: (event) => _startSplashTimer(emit),
+      );
+    });
+  }
 
-  Future<void> init() async => _startSplashTimer();
-
-  void _startSplashTimer() async {
+  Future<void> _startSplashTimer(Emitter<SplashState> emit) async {
     List<dynamic> results = await Future.wait([
       Future.delayed(
         const Duration(seconds: 2),

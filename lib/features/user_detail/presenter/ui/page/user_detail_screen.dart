@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_app/features/user_detail/presenter/state/user_detail_cubit.dart';
+import 'package:task_app/features/user_detail/presenter/state/user_detail_bloc.dart';
 import 'package:task_app/features/user_detail/presenter/ui/widget/item.dart';
 
 class UserDetailScreen extends StatelessWidget {
-  const UserDetailScreen({
-    super.key,
-  });
+  const UserDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserDetailCubit, UserDetailState>(
+    return BlocBuilder<UserDetailBloc, UserDetailState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(

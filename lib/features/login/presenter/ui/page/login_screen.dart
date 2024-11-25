@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:task_app/features/login/presenter/state/login_cubit.dart';
+import 'package:task_app/features/login/presenter/state/login_bloc.dart';
 import 'package:task_app/features/login/presenter/ui/widget/login_button.dart';
 import 'package:task_app/features/login/presenter/ui/widget/login_text_filed.dart';
 import 'package:task_app/features/login/presenter/ui/widget/remember_check_box.dart';
@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<LoginCubit, LoginState>(
+      body: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state.isLoginSuccess) {
             GoRouter.of(context).pushReplacement(Routes.home);
@@ -52,7 +52,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   RememberCheckBox(
                     isChecked: state.isRemeberMe,
                     onChanged: (value) {
-                      context.read<LoginCubit>().onChanged(value);
+                      context.read<LoginBloc>().add(
+                            LoginEvent.toggleRememberMe(value),
+                          );
                     },
                   ),
                   const Text('Remember Me'),
@@ -64,8 +66,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: "Login",
                   width: double.maxFinite,
                   onPressed: () {
-                    context.read<LoginCubit>().validateCredentials(
-                        _usernameController.text, _passwordController.text);
+                    context.read<LoginBloc>().add(
+                          LoginEvent.validateCredentials(
+                            _usernameController.text,
+                            _passwordController.text,
+                          ),
+                        );
                   },
                 ),
               )

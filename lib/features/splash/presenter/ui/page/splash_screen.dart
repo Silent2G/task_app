@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:task_app/features/splash/presenter/state/splash_cubit.dart';
+import 'package:task_app/features/splash/presenter/state/splash_bloc.dart';
 import 'package:task_app/router/routes.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -9,7 +9,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SplashCubit, SplashState>(
+    return BlocConsumer<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state.isLoaded) {
           GoRouter.of(context).pushReplacement(
