@@ -18,7 +18,6 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomeState {
   StateStatus get status => throw _privateConstructorUsedError;
   List<UserEntity> get users => throw _privateConstructorUsedError;
-  String? get authToken => throw _privateConstructorUsedError;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +31,7 @@ abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
-  $Res call({StateStatus status, List<UserEntity> users, String? authToken});
+  $Res call({StateStatus status, List<UserEntity> users});
 
   $StateStatusCopyWith<$Res> get status;
 }
@@ -54,7 +53,6 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   $Res call({
     Object? status = null,
     Object? users = null,
-    Object? authToken = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -65,10 +63,6 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.users
           : users // ignore: cast_nullable_to_non_nullable
               as List<UserEntity>,
-      authToken: freezed == authToken
-          ? _value.authToken
-          : authToken // ignore: cast_nullable_to_non_nullable
-              as String?,
     ) as $Val);
   }
 
@@ -91,7 +85,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       __$$HomeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({StateStatus status, List<UserEntity> users, String? authToken});
+  $Res call({StateStatus status, List<UserEntity> users});
 
   @override
   $StateStatusCopyWith<$Res> get status;
@@ -112,7 +106,6 @@ class __$$HomeStateImplCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? users = null,
-    Object? authToken = freezed,
   }) {
     return _then(_$HomeStateImpl(
       status: null == status
@@ -123,10 +116,6 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value._users
           : users // ignore: cast_nullable_to_non_nullable
               as List<UserEntity>,
-      authToken: freezed == authToken
-          ? _value.authToken
-          : authToken // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -135,9 +124,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 
 class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
-      {required this.status,
-      required final List<UserEntity> users,
-      this.authToken})
+      {required this.status, required final List<UserEntity> users})
       : _users = users;
 
   @override
@@ -151,11 +138,8 @@ class _$HomeStateImpl implements _HomeState {
   }
 
   @override
-  final String? authToken;
-
-  @override
   String toString() {
-    return 'HomeState(status: $status, users: $users, authToken: $authToken)';
+    return 'HomeState(status: $status, users: $users)';
   }
 
   @override
@@ -164,14 +148,12 @@ class _$HomeStateImpl implements _HomeState {
         (other.runtimeType == runtimeType &&
             other is _$HomeStateImpl &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._users, _users) &&
-            (identical(other.authToken, authToken) ||
-                other.authToken == authToken));
+            const DeepCollectionEquality().equals(other._users, _users));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, status,
-      const DeepCollectionEquality().hash(_users), authToken);
+  int get hashCode => Object.hash(
+      runtimeType, status, const DeepCollectionEquality().hash(_users));
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -185,15 +167,12 @@ class _$HomeStateImpl implements _HomeState {
 abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {required final StateStatus status,
-      required final List<UserEntity> users,
-      final String? authToken}) = _$HomeStateImpl;
+      required final List<UserEntity> users}) = _$HomeStateImpl;
 
   @override
   StateStatus get status;
   @override
   List<UserEntity> get users;
-  @override
-  String? get authToken;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
