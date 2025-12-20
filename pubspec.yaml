@@ -33,7 +33,7 @@ dev_dependencies:
     sdk: flutter
   retrofit_generator: ^9.1.5
   build_runner: ^2.4.13
-  analyzer: ^6.5.0
+  analyzer: ^7.7.1
   freezed: ^2.5.7  
   flutter_lints: ^4.0.0
 
